@@ -3,6 +3,7 @@ package com.ironhack.midterm.Controller.Implementation.Accounts;
 import com.ironhack.midterm.Controller.Interface.Accounts.CheckingControllerInterface;
 import com.ironhack.midterm.DTO.AccountsDTO.BalanceOnlyDTO;
 import com.ironhack.midterm.DTO.AccountsDTO.CheckingDTO;
+import com.ironhack.midterm.Model.Class.Money;
 import com.ironhack.midterm.Service.Interface.Accounts.CheckingServiceInterface;
 import com.ironhack.midterm.Service.Interface.Accounts.StudentsCheckingServiceInterface;
 import jakarta.validation.Valid;
@@ -50,7 +51,7 @@ public class CheckingController implements CheckingControllerInterface {
 
     @GetMapping("/checkings/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Object> getBalanceById(@PathVariable int id){
+    public Money getBalanceById(@PathVariable int id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
             return checkingService.getBalanceById(id);

@@ -3,6 +3,7 @@ package com.ironhack.midterm.Controller.Implementation.Accounts;
 import com.ironhack.midterm.Controller.Interface.Accounts.CreditCardControllerInterface;
 import com.ironhack.midterm.DTO.AccountsDTO.BalanceOnlyDTO;
 import com.ironhack.midterm.DTO.AccountsDTO.CreditCardDTO;
+import com.ironhack.midterm.Model.Class.Money;
 import com.ironhack.midterm.Service.Interface.Accounts.CreditCardServiceInterface;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class CreditCardController implements CreditCardControllerInterface {
 
     @GetMapping("/creditcards/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Object> getBalanceById(@PathVariable int id){
+    public Money getBalanceById(@PathVariable int id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
             return creditCardServiceInterface.getBalanceById(id);

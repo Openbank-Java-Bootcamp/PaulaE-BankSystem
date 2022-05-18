@@ -15,4 +15,6 @@ public interface AccountHolderServiceInterface {
 
     boolean OriginAccountForTransferFund(String username, String owner, BigDecimal amount);
     void tranferFundDestinationAccount(int id, BigDecimal amount);
+    void tranferFundTP(String name, BigDecimal amount);
+    boolean accountIdExist(int id);
 }

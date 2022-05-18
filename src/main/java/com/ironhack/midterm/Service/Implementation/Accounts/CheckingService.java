@@ -39,12 +39,14 @@ public class CheckingService implements CheckingServiceInterface {
        checkingRepository.save(newChecking);
     }
 
-    public List<Object> getBalanceById(int id){
+    public Money getBalanceById(int id){
         Optional<Checking> checkingDB = checkingRepository.findById(id);
         if (checkingDB.isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The id does´t not match any account");
         }else {
-            return checkingRepository.findBalanceById(id);
+            checkingDB.get().interestMantenanceFee();
+            checkingRepository.save(checkingDB.get());
+            return checkingDB.get().getBalance();
         }
     }
 

@@ -37,12 +37,14 @@ public class CreditCardService implements CreditCardServiceInterface {
         creditCardRepository.save(newCreditCard);
     }
 
-    public List<Object> getBalanceById(int id){
+    public Money getBalanceById(int id){
         Optional<CreditCard> creditcardDB = creditCardRepository.findById(id);
         if (creditcardDB.isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The id does´t not match any account");
         }else {
-            return creditCardRepository.findBalanceById(id);
+            creditcardDB.get().interestRate();
+            creditCardRepository.save(creditcardDB.get());
+            return creditcardDB.get().getBalance();
         }
     }
 

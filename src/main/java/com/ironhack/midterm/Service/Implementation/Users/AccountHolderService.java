@@ -8,6 +8,7 @@ import com.ironhack.midterm.Model.Accounts.StudentChecking;
 import com.ironhack.midterm.Model.Class.Money;
 import com.ironhack.midterm.Model.Users.AccountHolder;
 import com.ironhack.midterm.Model.Users.Role;
+import com.ironhack.midterm.Model.Users.ThirdParty;
 import com.ironhack.midterm.Model.Users.User;
 import com.ironhack.midterm.Repository.Accounts.CheckingRepository;
 import com.ironhack.midterm.Repository.Accounts.CreditCardRepository;
@@ -15,6 +16,7 @@ import com.ironhack.midterm.Repository.Accounts.SavingsRepository;
 import com.ironhack.midterm.Repository.Accounts.StudentsCheckingRepository;
 import com.ironhack.midterm.Repository.Users.AccountHolderRepository;
 import com.ironhack.midterm.Repository.Users.RoleRepository;
+import com.ironhack.midterm.Repository.Users.ThirdPartyRepository;
 import com.ironhack.midterm.Repository.Users.UserRepository;
 import com.ironhack.midterm.Service.Interface.Users.AccountHolderServiceInterface;
 import org.hibernate.annotations.Check;
@@ -53,6 +55,9 @@ public class AccountHolderService implements AccountHolderServiceInterface {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ThirdPartyRepository thirdPartyRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -132,45 +137,88 @@ public class AccountHolderService implements AccountHolderServiceInterface {
                 }
                 return newAccountHolder;
             }
-        }
+    }
 
-        public boolean OriginAccountForTransferFund(String username, String owner, BigDecimal amount){
-            //we look in every account type if any fullfil all the requirements
-            //Requirement: 1)primary/secondary owner (username)
-            //2) primary/secondary owner (name)
-            //3) Enough funds
+    public boolean OriginAccountForTransferFund(String username, String owner, BigDecimal amount){
+        boolean OriginAccountFound = false;
+        //FINDING THE MAX BALANCE
+            String typoAccount = null;
+            int idMaxBalance = 0;
+            BigDecimal maxBalance = new BigDecimal(0);
             List<Checking> chekingValid = checkingRepository.findBalanceByUserNameAndNameAndAmount(username, owner, amount);
+            if (chekingValid.size() != 0) {
+                for (Checking o : chekingValid){
+                    if (o.getBalance().getAmount().compareTo(maxBalance) > 0){
+                        maxBalance = o.getBalance().getAmount();
+                        idMaxBalance = o.getId();
+                        typoAccount = "CHECKING";
+                    }
+                }
+            }
             List<CreditCard> creditCardValid = creditCardRepository.findBalanceByUserNameAndNameAndAmount(username, owner, amount);
+            if (creditCardValid.size() != 0) {
+                for (CreditCard o : creditCardValid){
+                    if (o.getBalance().getAmount().compareTo(maxBalance) > 0){
+                        maxBalance = o.getBalance().getAmount();
+                        idMaxBalance = o.getId();
+                        typoAccount = "CREDITCARD";
+                    }
+                }
+            }
             List<Savings> savingsValid = savingsRepository.findBalanceByUserNameAndNameAndAmount(username, owner, amount);
+            if (savingsValid.size() != 0) {
+                for (Savings o : savingsValid){
+                    if (o.getBalance().getAmount().compareTo(maxBalance) > 0){
+                        maxBalance = o.getBalance().getAmount();
+                        idMaxBalance = o.getId();
+                        typoAccount = "SAVINGS";
+                    }
+                }
+            }
             List<StudentChecking> studentCheckingsValid = studentsCheckingRepository.findBalanceByUserNameAndNameAndAmount(username, owner, amount);
-             if (chekingValid.size() != 0){
-                Checking account = chekingValid.get(0);
-                account.getBalance().decreaseAmount(amount);
-                account.penaltyFee();
-                checkingRepository.save(account);
-                return true;
-            }else if(creditCardValid.size() != 0){
-                 CreditCard account = creditCardValid.get(0);
-                 account.getBalance().decreaseAmount(amount);
-                 creditCardRepository.save(account);
-                 return true;
-             }else if(savingsValid.size() != 0){
-                 Savings account = savingsValid.get(0);
-                 account.getBalance().decreaseAmount(amount);
-                 account.penaltyFee();
-                 savingsRepository.save(account);
-                 return true;
-             }else if (studentCheckingsValid.size() != 0){
-                 StudentChecking account = studentCheckingsValid.get(0);
-                 account.getBalance().decreaseAmount(amount);
-                 studentsCheckingRepository.save(account);
-                 return true;
-             }else{
-                 return false;
-             }
+            if (studentCheckingsValid.size() != 0) {
+                for (StudentChecking o : studentCheckingsValid){
+                    if (o.getBalance().getAmount().compareTo(maxBalance) > 0){
+                        maxBalance = o.getBalance().getAmount();
+                        idMaxBalance = o.getId();
+                        typoAccount = "STUDENTCHECKING";
+                    }
+                }
+            }
+            //DECREASING THE AMOUNTH FROM THE ONE WITH HIGHEST BALANCE
+            switch (typoAccount){
+                case "CHECKING":
+                    Checking account = checkingRepository.findById(idMaxBalance).get();
+                    account.getBalance().decreaseAmount(amount);
+                    account.penaltyFee();
+                    checkingRepository.save(account);
+                    OriginAccountFound = true;
+                    break;
+                case "CREDITCARD":
+                    CreditCard account1 = creditCardRepository.findById(idMaxBalance).get();
+                    account1.getBalance().decreaseAmount(amount);
+                    creditCardRepository.save(account1);
+                    OriginAccountFound = true;
+                    break;
+                case "SAVINGS":
+                    Savings account3 = savingsRepository.findById(idMaxBalance).get();
+                    account3.getBalance().decreaseAmount(amount);
+                    account3.penaltyFee();
+                    savingsRepository.save(account3);
+                    OriginAccountFound = true;
+                    break;
+                case "STUDENTCHECKING":
+                    StudentChecking account4 = studentsCheckingRepository.findById(idMaxBalance).get();
+                    account4.getBalance().decreaseAmount(amount);
+                    studentsCheckingRepository.save(account4);
+                    OriginAccountFound = true;
+                    break;
+                default:
+                    OriginAccountFound = false;
+            }
+            return OriginAccountFound;
         }
-
-        public void tranferFundDestinationAccount(int id, BigDecimal amount){
+    public void tranferFundDestinationAccount(int id, BigDecimal amount){
             Optional<Checking> checkingDB = checkingRepository.findById(id);
             Optional<CreditCard> creditcardDB = creditCardRepository.findById(id);
             Optional<Savings> savingsDB = savingsRepository.findById(id);
@@ -190,5 +238,33 @@ public class AccountHolderService implements AccountHolderServiceInterface {
             }else{
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "There is not an account with that ID to send the funds to.");
             }
+    }
+
+    public void tranferFundTP(String name, BigDecimal amount){
+        Optional<ThirdParty> thirdPartyDB = thirdPartyRepository.findByName(name);
+        if (thirdPartyDB.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "That name doesn´t correspond to a Third Party");
         }
+    }
+
+    public boolean accountIdExist(int id){
+        Optional<Checking> checkingDB = checkingRepository.findById(id);
+        Optional<CreditCard> creditcardDB = creditCardRepository.findById(id);
+        Optional<Savings> savingsDB = savingsRepository.findById(id);
+        Optional<StudentChecking> studentcheckingDB = studentsCheckingRepository.findById(id);
+        if (checkingDB.isPresent()){
+            return true;
+        }else if(creditcardDB.isPresent()){
+            return true;
+        }else if(savingsDB.isPresent()){
+            return true;
+        }else if (studentcheckingDB.isPresent()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+
 }

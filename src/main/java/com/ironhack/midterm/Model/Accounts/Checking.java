@@ -96,7 +96,7 @@ public class Checking extends Account {
         Date currentTime = new Date();
         double days = DaysSinceLastMaintenanceFee(currentTime);
         if (days >= 30){
-            super.getBalance().decreaseAmount(super.getBalance().getAmount().multiply(monthlyMaintenanceFee.getAmount()));
+            super.getBalance().decreaseAmount(monthlyMaintenanceFee.getAmount());
         }
     }
 
@@ -108,6 +108,7 @@ public class Checking extends Account {
         }
         else{
             initialTime = super.getCreationDate().getTime();
+            lastMaintenanceFee = new Date();
         }
         long difference = currentTimeLong - initialTime;
         double days = Math.floor(difference / (1000 * 60 * 60 * 24));

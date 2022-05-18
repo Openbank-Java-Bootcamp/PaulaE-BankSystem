@@ -34,7 +34,7 @@ public class Savings extends Account {
     public Savings() {
     }
 
-    public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, BigDecimal interestRate) {
+    public Savings(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner, String secretKey, BigDecimal interestRate)  {
         super(balance, primaryOwner, secondaryOwner);
         this.secretKey = secretKey;
         //default value

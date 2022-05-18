@@ -10,7 +10,7 @@ public interface CreditCardServiceInterface  {
 
      void saveCreditCard( CreditCardDTO creditCardDTO) throws Exception;
 
-     List<Object> getBalanceById(int id);
+     Money getBalanceById(int id);
      void updateBalance(int id, Money Balance);
 
      void deleteCreditCard(int id);

@@ -40,12 +40,14 @@ public class SavingsService implements SavingServiceInterface {
         savingsRepository.save(newSavings);
     }
 
-    public List<Object> getBalanceById(int id) {
+    public Money getBalanceById(int id) {
         Optional<Savings> savingsDB = savingsRepository.findById(id);
         if (savingsDB.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The id does´t not match any account");
         } else {
-            return savingsRepository.findBalanceById(id);
+            savingsDB.get().interestRate();
+            savingsRepository.save(savingsDB.get());
+            return savingsDB.get().getBalance();
         }
     }
 

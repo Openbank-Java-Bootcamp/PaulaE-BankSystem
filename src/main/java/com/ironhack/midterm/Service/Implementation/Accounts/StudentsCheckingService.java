@@ -77,7 +77,6 @@ public class StudentsCheckingService implements StudentsCheckingServiceInterface
         }
     }
 
-
     public boolean UserAccount(int id, String username){
         boolean gooAccount = false;
         Optional<StudentChecking> studentcheckingDB = studentsCheckingRepository.findById(id);

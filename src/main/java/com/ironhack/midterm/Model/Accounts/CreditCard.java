@@ -5,6 +5,7 @@ import com.ironhack.midterm.Model.Class.Money;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 @Entity
@@ -71,7 +72,7 @@ public class CreditCard extends Account {
         Date currentTime = new Date();
         double days = DaysSinceLastInterest(currentTime);
         if (days >= 30){
-            super.getBalance().increaseAmount(super.getBalance().getAmount().multiply(interestRate.divide(new BigDecimal(12))));
+            super.getBalance().increaseAmount(super.getBalance().getAmount().multiply(interestRate.divide(new BigDecimal(12), 8, RoundingMode.DOWN)));
         }
     }
 

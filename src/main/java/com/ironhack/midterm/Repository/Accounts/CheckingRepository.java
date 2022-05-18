@@ -13,8 +13,6 @@ import java.util.List;
 @Repository
 public interface CheckingRepository extends JpaRepository<Checking, Integer> {
 
-    @Query(nativeQuery = true, value = "SELECT balance, balance_currency FROM checking WHERE id = :id")
-    List<Object> findBalanceById(int id);
 
     @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM checking WHERE primary_owner_id = :id OR secondary_owner_id = :id")
     int findNumberAccountsByUserid(int id);

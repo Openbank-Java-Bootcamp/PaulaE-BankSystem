@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -46,7 +47,8 @@ public class Account {
     public Account() {
     }
 
-    public Account(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
+    //quitar el throw exception
+    public Account(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner)  {
         this.balance = balance;
         this.primaryOwner = primaryOwner;
         SecondaryOwner = secondaryOwner;

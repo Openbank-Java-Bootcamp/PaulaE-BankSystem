@@ -11,7 +11,7 @@ public interface CheckingServiceInterface {
 
     void saveChecking(CheckingDTO Checking) throws Exception;
 
-    List<Object> getBalanceById(int id);
+    Money getBalanceById(int id);
     void updateBalance(int id, Money Balance);
 
     void deleteChecking(int id);
