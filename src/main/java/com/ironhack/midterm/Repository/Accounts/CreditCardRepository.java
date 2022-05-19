@@ -21,6 +21,6 @@ public interface CreditCardRepository extends JpaRepository<CreditCard, Integer>
     List<CreditCard> findbyUserName(String username);
 
     @Query(nativeQuery = true, value = "SELECT * FROM credit_card JOIN account_holder ON credit_card.primary_owner_id = account_holder.user_id " +
-            "OR credit_card.secondary_owner_id = account_holder.user_id WHERE account_holder.username = :username AND account_holder.name = :name AND credit_card.balance > :amounth ")
+            "OR credit_card.secondary_owner_id = account_holder.user_id WHERE account_holder.username = :name AND account_holder.name = :username AND credit_card.balance > :amounth ")
     List<CreditCard>findBalanceByUserNameAndNameAndAmount(String name, String username, BigDecimal amounth);
 }

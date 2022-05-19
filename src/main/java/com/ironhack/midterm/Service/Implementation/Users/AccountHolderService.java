@@ -142,11 +142,11 @@ public class AccountHolderService implements AccountHolderServiceInterface {
     public boolean OriginAccountForTransferFund(String username, String owner, BigDecimal amount){
         boolean OriginAccountFound = false;
         //FINDING THE MAX BALANCE
-            String typoAccount = null;
+            String typoAccount = "NOTHING";
             int idMaxBalance = 0;
             BigDecimal maxBalance = new BigDecimal(0);
             List<Checking> chekingValid = checkingRepository.findBalanceByUserNameAndNameAndAmount(username, owner, amount);
-            if (chekingValid.size() != 0) {
+            if (chekingValid != null) {
                 for (Checking o : chekingValid){
                     if (o.getBalance().getAmount().compareTo(maxBalance) > 0){
                         maxBalance = o.getBalance().getAmount();
@@ -156,7 +156,7 @@ public class AccountHolderService implements AccountHolderServiceInterface {
                 }
             }
             List<CreditCard> creditCardValid = creditCardRepository.findBalanceByUserNameAndNameAndAmount(username, owner, amount);
-            if (creditCardValid.size() != 0) {
+            if (creditCardValid != null) {
                 for (CreditCard o : creditCardValid){
                     if (o.getBalance().getAmount().compareTo(maxBalance) > 0){
                         maxBalance = o.getBalance().getAmount();
@@ -166,7 +166,7 @@ public class AccountHolderService implements AccountHolderServiceInterface {
                 }
             }
             List<Savings> savingsValid = savingsRepository.findBalanceByUserNameAndNameAndAmount(username, owner, amount);
-            if (savingsValid.size() != 0) {
+            if (savingsValid != null) {
                 for (Savings o : savingsValid){
                     if (o.getBalance().getAmount().compareTo(maxBalance) > 0){
                         maxBalance = o.getBalance().getAmount();
@@ -176,7 +176,7 @@ public class AccountHolderService implements AccountHolderServiceInterface {
                 }
             }
             List<StudentChecking> studentCheckingsValid = studentsCheckingRepository.findBalanceByUserNameAndNameAndAmount(username, owner, amount);
-            if (studentCheckingsValid.size() != 0) {
+            if (studentCheckingsValid != null) {
                 for (StudentChecking o : studentCheckingsValid){
                     if (o.getBalance().getAmount().compareTo(maxBalance) > 0){
                         maxBalance = o.getBalance().getAmount();

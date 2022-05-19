@@ -23,7 +23,7 @@ public interface StudentsCheckingRepository extends JpaRepository<StudentCheckin
     @Query(nativeQuery = true, value = "SELECT * FROM student_checking JOIN account_holder ON student_checking.primary_owner_id = account_holder.user_id OR student_checking.secondary_owner_id = account_holder.user_id  WHERE account_holder.username = :username" )
     List<StudentChecking> findbyUserName(String username);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM credit_card JOIN account_holder ON credit_card.primary_owner_id = account_holder.user_id " +
-            "OR credit_card.secondary_owner_id = account_holder.user_id WHERE account_holder.username = :username AND account_holder.name = :name AND credit_card.balance > :amounth ")
+    @Query(nativeQuery = true, value = "SELECT * FROM student_checking JOIN account_holder ON student_checking.primary_owner_id = account_holder.user_id " +
+            "OR student_checking.secondary_owner_id = account_holder.user_id WHERE account_holder.username = :name AND account_holder.name = :username AND student_checking.balance > :amounth ")
     List<StudentChecking>  findBalanceByUserNameAndNameAndAmount(String name, String username, BigDecimal amounth);
 }

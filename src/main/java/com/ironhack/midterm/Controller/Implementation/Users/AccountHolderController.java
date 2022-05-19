@@ -22,7 +22,7 @@ public class AccountHolderController implements AccountHolderControllerInterface
     @Autowired
     AccountHolderServiceInterface accountHolderServiceInterface;
     //accountHolder is created when an account is created no post method need.
-    @PatchMapping("/transferfunds")
+    @PatchMapping("accountholder/transferfunds")
     @ResponseStatus(HttpStatus.OK)
     public void transferfunds(@RequestParam String username, @RequestParam int id, @RequestParam BigDecimal quantity){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -35,12 +35,12 @@ public class AccountHolderController implements AccountHolderControllerInterface
         }
     }
 
-    @PatchMapping("/transferfunds/thridparty")
+    @PatchMapping("accountholder/transferfunds/thridparty")
     @ResponseStatus(HttpStatus.OK)
     public void transferfundsTP(@RequestParam String name, @RequestParam String TPname, @RequestParam BigDecimal quantity){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String AccountHolderUserName = auth.getName();
-        if (accountHolderServiceInterface.OriginAccountForTransferFund(AccountHolderUserName, name, quantity) && thirdPartyServiceInterface.getByName(name)){
+        if (accountHolderServiceInterface.OriginAccountForTransferFund(AccountHolderUserName, name, quantity) && thirdPartyServiceInterface.getByName(TPname)){
             accountHolderServiceInterface.tranferFundTP(TPname, quantity);
         }else{
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No account fund to process the transaction");

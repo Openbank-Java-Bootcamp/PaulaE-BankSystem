@@ -62,8 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(DELETE, "/api/checkings/{id}").hasAnyAuthority("ADMIN");
         http.authorizeRequests().antMatchers(PATCH, "/api/savings/{id}").hasAnyAuthority("ADMIN");
         http.authorizeRequests().antMatchers(DELETE, "/api/savings/{id}").hasAnyAuthority("ADMIN");
-        http.authorizeRequests().antMatchers(PATCH, "/api/transferfunds").hasAnyAuthority( "ACCOUNT_HOLDER");
-        http.authorizeRequests().antMatchers(PATCH, "/api/transferfunds/thridparty").hasAnyAuthority( "ACCOUNT_HOLDER");
+        http.authorizeRequests().antMatchers(PATCH, "/api/accountholder/transferfunds").hasAnyAuthority( "ACCOUNT_HOLDER");
+        http.authorizeRequests().antMatchers(PATCH, "/api/accountholder/transferfunds/thridparty").hasAnyAuthority( "ACCOUNT_HOLDER");
         http.authorizeRequests().antMatchers(PATCH, "/api/thridparty/transferfund").hasAnyAuthority( "THIRD_PARTY");
 
         http.authorizeRequests().anyRequest().authenticated();
