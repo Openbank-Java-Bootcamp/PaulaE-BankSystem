@@ -23,6 +23,7 @@ public class Savings extends Account {
     private BigDecimal interestRate;
 
     private Date lastInterestRate;
+    private Date lastTransactionMade;
 
     @Embedded
     @AttributeOverrides({
@@ -132,5 +133,31 @@ public class Savings extends Account {
         return days;
     }
 
+    public boolean fraudDetection(){
+        Date date = new Date();
+        boolean notfraud = false;
+        if (lastTransactionMade != null) {
+            if(lastTransactionMade.getYear() == date.getYear() && lastTransactionMade.getMonth() == date.getMonth()
+                    && lastTransactionMade.getDay() == date.getDay() && lastTransactionMade.getHours() == date.getHours()
+                    && lastTransactionMade.getHours() == date.getHours() && lastTransactionMade.getMinutes() == date.getMinutes()
+                    && (lastTransactionMade.getSeconds() + 30) > date.getSeconds() ){
+                this.setStatus(Status.FROZEN);
+                notfraud = true;
+            }else {
+                lastTransactionMade = date;
+            }
+        }else{
+            lastTransactionMade = date;
+        }
+        return notfraud;
+    }
+
+    public Date getLastTransactionMade() {
+        return lastTransactionMade;
+    }
+
+    public void setLastTransactionMade(Date lastTransactionMade) {
+        this.lastTransactionMade = lastTransactionMade;
+    }
 }
 

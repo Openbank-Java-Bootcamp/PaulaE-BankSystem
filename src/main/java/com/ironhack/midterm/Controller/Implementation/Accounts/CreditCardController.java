@@ -44,10 +44,6 @@ public class CreditCardController implements CreditCardControllerInterface {
         }
     }
 
-
-
-
-
     @PatchMapping("/creditcards/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateBalance(@PathVariable int id, @RequestBody BalanceOnlyDTO balanceOnlyDTO){

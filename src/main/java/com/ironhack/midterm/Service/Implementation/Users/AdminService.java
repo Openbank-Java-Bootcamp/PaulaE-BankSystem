@@ -63,8 +63,8 @@ public class AdminService implements AdminServiceInterface {
 
     public void deleteAdmin(int id) {
         Optional<Admin> adminDB = adminRepository.findById(id);
-        if (adminDB.isPresent()){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "An admin already has that name, remember your password");
+        if (!adminDB.isPresent()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "There is no admin with such id");
         }else{
             adminRepository.deleteById(id);
         }

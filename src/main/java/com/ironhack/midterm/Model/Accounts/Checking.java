@@ -5,6 +5,8 @@ import com.ironhack.midterm.Model.Users.AccountHolder;
 import com.ironhack.midterm.Model.Class.Money;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -33,6 +35,8 @@ public class Checking extends Account {
     private Status status;
 
     private Date lastMaintenanceFee;
+
+    private Date lastTransactionMade;
 
     public Checking() {
     }
@@ -115,4 +119,42 @@ public class Checking extends Account {
         return days;
     }
 
+    public void setBalance(Money Balance){
+        super.setBalance(Balance);
+    }
+
+    public boolean fraudDetection(){
+        Date date = new Date();
+        boolean notfraud = false;
+        if (lastTransactionMade != null) {
+            if(lastTransactionMade.getYear() == date.getYear() && lastTransactionMade.getMonth() == date.getMonth()
+                    && lastTransactionMade.getDay() == date.getDay() && lastTransactionMade.getHours() == date.getHours()
+                    && lastTransactionMade.getHours() == date.getHours() && lastTransactionMade.getMinutes() == date.getMinutes()
+                    && (lastTransactionMade.getSeconds() + 30) > date.getSeconds() ){
+                this.setStatus(Status.FROZEN);
+                notfraud = true;
+            }else {
+                lastTransactionMade = date;
+            }
+        }else{
+            lastTransactionMade = date;
+        }
+        return notfraud;
+    }
+
+    public Date getLastMaintenanceFee() {
+        return lastMaintenanceFee;
+    }
+
+    public void setLastMaintenanceFee(Date lastMaintenanceFee) {
+        this.lastMaintenanceFee = lastMaintenanceFee;
+    }
+
+    public Date getLastTransactionMade() {
+        return lastTransactionMade;
+    }
+
+    public void setLastTransactionMade(Date lastTransactionMade) {
+        this.lastTransactionMade = lastTransactionMade;
+    }
 }

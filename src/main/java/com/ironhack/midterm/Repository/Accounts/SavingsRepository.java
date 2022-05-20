@@ -14,7 +14,6 @@ import java.util.List;
 @Repository
 public interface SavingsRepository extends JpaRepository<Savings, Integer> {
 
-
     @Query(nativeQuery = true, value = "SELECT COUNT(*) FROM savings WHERE primary_owner_id = :id OR secondary_owner_id = :id")
     int findNumberAccountsByUserid(int id);
 

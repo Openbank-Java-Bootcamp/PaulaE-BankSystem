@@ -1,6 +1,7 @@
 package com.ironhack.midterm.Service.Implementation.Users;
 
 import com.ironhack.midterm.DTO.UsersDTO.AccountHolderDTO;
+import com.ironhack.midterm.Enum.Status;
 import com.ironhack.midterm.Model.Accounts.Checking;
 import com.ironhack.midterm.Model.Accounts.CreditCard;
 import com.ironhack.midterm.Model.Accounts.Savings;
@@ -28,10 +29,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AccountHolderService implements AccountHolderServiceInterface {
@@ -189,6 +187,11 @@ public class AccountHolderService implements AccountHolderServiceInterface {
             switch (typoAccount){
                 case "CHECKING":
                     Checking account = checkingRepository.findById(idMaxBalance).get();
+                    if (account.fraudDetection()){
+                        account.setStatus(Status.FROZEN);
+                        checkingRepository.save(account);
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "FRAUD DETECTED! Account FROZEN");
+                    }
                     account.getBalance().decreaseAmount(amount);
                     account.penaltyFee();
                     checkingRepository.save(account);
@@ -202,6 +205,10 @@ public class AccountHolderService implements AccountHolderServiceInterface {
                     break;
                 case "SAVINGS":
                     Savings account3 = savingsRepository.findById(idMaxBalance).get();
+                    if (account3.fraudDetection()) {
+                        account3.setStatus(Status.FROZEN);
+                        savingsRepository.save(account3);
+                    }
                     account3.getBalance().decreaseAmount(amount);
                     account3.penaltyFee();
                     savingsRepository.save(account3);
@@ -209,6 +216,10 @@ public class AccountHolderService implements AccountHolderServiceInterface {
                     break;
                 case "STUDENTCHECKING":
                     StudentChecking account4 = studentsCheckingRepository.findById(idMaxBalance).get();
+                    if (account4.fraudDetection()) {
+                        account4.setStatus(Status.FROZEN);
+                        studentsCheckingRepository.save(account4);
+                    }
                     account4.getBalance().decreaseAmount(amount);
                     studentsCheckingRepository.save(account4);
                     OriginAccountFound = true;

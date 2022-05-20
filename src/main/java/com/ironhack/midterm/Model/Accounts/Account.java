@@ -5,6 +5,8 @@ import com.ironhack.midterm.Model.Users.AccountHolder;
 import com.ironhack.midterm.Model.Class.Money;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -43,6 +45,8 @@ public class Account {
     private Money penaltyFee;
 
     private Date creationDate;
+
+    private Date lastTransactionMade;
 
     public Account() {
     }
@@ -104,4 +108,6 @@ public class Account {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
+
 }

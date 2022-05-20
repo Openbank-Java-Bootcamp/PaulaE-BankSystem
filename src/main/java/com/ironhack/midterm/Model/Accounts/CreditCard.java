@@ -1,5 +1,6 @@
 package com.ironhack.midterm.Model.Accounts;
 
+import com.ironhack.midterm.Enum.Status;
 import com.ironhack.midterm.Model.Users.AccountHolder;
 import com.ironhack.midterm.Model.Class.Money;
 import jakarta.persistence.*;
@@ -21,6 +22,7 @@ public class CreditCard extends Account {
     private BigDecimal interestRate;
 
     private Date lastInterestRate;
+
 
     public CreditCard() {
     }
@@ -91,5 +93,13 @@ public class CreditCard extends Account {
         return days;
     }
 
+
+    public Date getLastInterestRate() {
+        return lastInterestRate;
+    }
+
+    public void setLastInterestRate(Date lastInterestRate) {
+        this.lastInterestRate = lastInterestRate;
+    }
 }
 

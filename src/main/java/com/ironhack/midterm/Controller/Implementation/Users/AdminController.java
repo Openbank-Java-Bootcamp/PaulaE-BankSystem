@@ -24,7 +24,7 @@ public class AdminController implements AdminControllerInterface {
     }
 
     @DeleteMapping("/admins/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAdmin(@PathVariable int  id) {
         adminServiceInterface.deleteAdmin(id);
     }

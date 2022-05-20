@@ -1,9 +1,11 @@
 package com.ironhack.midterm.DTO.AccountsDTO;
 
 import com.ironhack.midterm.Model.Class.Money;
+import jakarta.validation.constraints.NotNull;
 
 public class BalanceOnlyDTO {
 
+    @NotNull
     public Money balance;
 
     public BalanceOnlyDTO() {

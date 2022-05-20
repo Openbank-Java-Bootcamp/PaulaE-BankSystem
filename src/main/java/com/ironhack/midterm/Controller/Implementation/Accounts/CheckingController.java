@@ -67,8 +67,8 @@ public class CheckingController implements CheckingControllerInterface {
 
     @PatchMapping("/checkings/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateBalance(@PathVariable int id, @RequestBody BalanceOnlyDTO balanceOnlyDTO){
-        checkingService.updateBalance(id, balanceOnlyDTO.getBalance());
+    public void updateBalance(@PathVariable int id, @RequestBody @Valid BalanceOnlyDTO balanceOnlyDTO){
+        checkingService.updateBalance(id, balanceOnlyDTO);
     }
 
     @DeleteMapping("/checkings/{id}")

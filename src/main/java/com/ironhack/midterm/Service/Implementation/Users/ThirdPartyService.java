@@ -88,7 +88,7 @@ public class ThirdPartyService implements ThirdPartyServiceInterface {
 
     public void deleteThridParty(int id) {
         Optional<ThirdParty> thirdPartyDB = thirdPartyRepository.findById(id);
-        if (thirdPartyDB.isPresent()){
+        if (!thirdPartyDB.isPresent()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A third Party already has that name, remember your password");
         }else{
             thirdPartyRepository.deleteById(id);
