@@ -3,7 +3,7 @@
 Welcome to the readme of the Baking Systems made by Paula Esteban Barrigón. 
 In this documment you can find all the information needed to understand my understanding of the task.
 
-##1.	Description of the project
+## 1.	Description of the project
 
 This proyect represented a banking system of the which I will give a short explanation in this section.
 
@@ -53,7 +53,7 @@ at the beggining, that general authorization was needed to use the system.
                       In the requirements, it was said that is should be under 1s but, in order to verify the correct working of my system, I modify the time limit.
                       When a Fraud case is discover, the second transaction is denied and the status of the account is change to FREEZE.
 
-##2.	Technologies Used
+## 2.	Technologies Used
 
 This proyect was develop in Java and Spring-Boot.
 For the databases we use MySQL.
@@ -74,7 +74,7 @@ The different accounts have different properties, always following the instructi
 
 Users following the same squema as Accounts. All the users exteds the Class "User".
 
-##4.	Server routes table(Method, Route or URL, Description as columns)
+## 3.	Server routes table(Method, Route or URL, Description as columns)
 
 In this section, we are going to explain the different end points as well as explain in more detail the methods which I believed either by it functionality or its
 caractheristics deserve a special attention.
@@ -270,7 +270,7 @@ Secondly, we look if in any of those accounts the primary or secondary owner is 
 | `amouth` | `Big Decimal` | **Required**. Amouth of money to tranfer |
   
   
-##10.	Resources
+## 4.	Resources
 In order to complete this proyect Google, Shaun and Raymond were use are sources. Thank you all for sharing your knowledge with me!
 
 
