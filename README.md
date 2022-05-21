@@ -45,9 +45,9 @@ at the beggining, that general authorization was needed to use the system.
   8. Modify account balance --> only admins 
   
   9. Tranfer fund --> There are two 3 types of transacction 
-      >9.1 Transfer from and account to another account --> only the primary or secondary owner of the account origen is allow.
-      >9.2 Tranfer from an account to a thrid party --> only the primary or secondary owner of the account origen is allow.
-      >9.3 Tranfer from a thridparty to an account --> only the thrid party in cuestion is allow.
+        1. Transfer from and account to another account --> only the primary or secondary owner of the account origen is allow.
+        2. Tranfer from an account to a thrid party --> only the primary or secondary owner of the account origen is allow.
+        3. Tranfer from a thridparty to an account --> only the thrid party in cuestion is allow.
 
       >Important notice: every time a transaction is made it is check if it could be a fraud case. A fraud case is consider if an account send 2 transaction in under 30s.
                       In the requirements, it was said that is should be under 1s but, in order to verify the correct working of my system, I modify the time limit.
@@ -190,11 +190,11 @@ caractheristics deserve a special attention.
 
   Important notice: When balance is checked, the systems verify is any interest rate / commision fee should be apply.
   
-                    >1) Penalty Fee --> in Checkings and Savings if balance < minimum balance
+                    1. Penalty Fee --> in Checkings and Savings if balance < minimum balance
                     
-                    >2) Monthly Maintenance Fee --> in Checkings if more of 30 days have past since it was apply for the last time
+                    2. Monthly Maintenance Fee --> in Checkings if more of 30 days have past since it was apply for the last time
                     
-                    >3) Interest rate --> in Credit Cardid if more than 30 days have past since it was apply for the last time.
+                    3. Interest rate --> in Credit Cardid if more than 30 days have past since it was apply for the last time.
                     
                                          In Savings if more than 365 days have past since it was apply for the last time.
                                          
