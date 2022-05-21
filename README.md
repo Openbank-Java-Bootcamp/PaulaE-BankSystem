@@ -123,7 +123,7 @@ caractheristics deserve a special attention.
 
 #### Create admin users:
 
- ```http
+  ```http
   POST /api/admins
 ```
 | Parameter | Type     | Description                |
@@ -172,16 +172,16 @@ caractheristics deserve a special attention.
 
 #### Get the balance of an account
 
- ```http
+   ```http
   GET /api/checkings/{id}
 ```
- ```http
+  ```http
   GET /api/savings/{id}
 ```
- ```http
+  ```http
   GET /api/creditcards/{id}
 ```
- ```http
+  ```http
   GET /api/studentcheckingss/{id}
 ```
 | Parameter | Type     | Description                |
@@ -196,7 +196,7 @@ caractheristics deserve a special attention.
                                          
 
 ### Update de balance of an account
- ```http
+  ```http
   PATCH /api/checkings/{id}
 ```
 | Parameter | Type     | Description                |
