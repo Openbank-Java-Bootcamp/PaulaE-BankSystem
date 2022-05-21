@@ -203,6 +203,15 @@ caractheristics deserve a special attention.
   ```http
   PATCH /api/checkings/{id}
 ```
+  ```http
+  PATCH /api/savings/{id}
+```
+  ```http
+  PATCH /api/studentcheckings/{id}
+```
+  ```http
+  PATCH /api/creditcards/{id}
+```
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `id` | `int` | **Required**. The id of the account to update the balance of |
