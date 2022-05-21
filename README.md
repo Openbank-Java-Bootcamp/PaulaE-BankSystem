@@ -27,11 +27,11 @@ at the beggining, that general authorization was needed to use the system.
   2. Removal of admin --> everyone is allow. Same reasoning as the previous one.
 
   3. Creation of a bank Account  --> only admins ae allow.
-     Important notice : When created a bank account, the accounth holder (Primary and/or Secondary owner) are created at the same time if they don´t existed in the datebase. 
+     >Important notice : When created a bank account, the accounth holder (Primary and/or Secondary owner) are created at the same time if they don´t existed in the datebase. 
                         Creation of an account holder alone is not possible
             
   4. Removal of a bank Account --> only admins are allow.
-     Important notice: When remove a bank account, the account holder (Primery and/or Secondary owner) are removed at the same time if they dont have any other account in the system.
+    > Important notice: When remove a bank account, the account holder (Primery and/or Secondary owner) are removed at the same time if they dont have any other account in the system.
                        Removal of account holder alone is not possible.
                        
   5. Creation of thrid parties --> only admins are allow.
@@ -39,17 +39,17 @@ at the beggining, that general authorization was needed to use the system.
   6. Removal of thrid parties --> only admins are allow.
   
   7. Check balance of an account --> admins and the account holder of the account (both primary and secondary owner) are allow.
-     Important notice: when the balance of an account is checked, it is also checked if the interest rate or maintenance fee should be apply and, in case it is, 
+     > Important notice: when the balance of an account is checked, it is also checked if the interest rate or maintenance fee should be apply and, in case it is, 
                       it is apply before the visualizing of the balance.
                
   8. Modify account balance --> only admins 
   
-  10. Tranfer fund --> There are two 3 types of transacction 
-      10.1 Transfer from and account to another account --> only the primary or secondary owner of the account origen is allow.
-      10.2 Tranfer from an account to a thrid party --> only the primary or secondary owner of the account origen is allow.
-      11.3 Tranfer from a thridparty to an account --> only the thrid party in cuestion is allow.
+  9. Tranfer fund --> There are two 3 types of transacction 
+      >9.1 Transfer from and account to another account --> only the primary or secondary owner of the account origen is allow.
+      >9.2 Tranfer from an account to a thrid party --> only the primary or secondary owner of the account origen is allow.
+      >9.3 Tranfer from a thridparty to an account --> only the thrid party in cuestion is allow.
 
-      Important notice: every time a transaction is made it is check if it could be a fraud case. A fraud case is consider if an account send 2 transaction in under 30s.
+      >Important notice: every time a transaction is made it is check if it could be a fraud case. A fraud case is consider if an account send 2 transaction in under 30s.
                       In the requirements, it was said that is should be under 1s but, in order to verify the correct working of my system, I modify the time limit.
                       When a Fraud case is discover, the second transaction is denied and the status of the account is change to FREEZE.
 
@@ -190,11 +190,11 @@ caractheristics deserve a special attention.
 
   Important notice: When balance is checked, the systems verify is any interest rate / commision fee should be apply.
   
-                    1) Penalty Fee --> in Checkings and Savings if balance < minimum balance
+                    >1) Penalty Fee --> in Checkings and Savings if balance < minimum balance
                     
-                    2) Monthly Maintenance Fee --> in Checkings if more of 30 days have past since it was apply for the last time
+                    >2) Monthly Maintenance Fee --> in Checkings if more of 30 days have past since it was apply for the last time
                     
-                    3) Interest rate --> in Credit Cardid if more than 30 days have past since it was apply for the last time.
+                    >3) Interest rate --> in Credit Cardid if more than 30 days have past since it was apply for the last time.
                     
                                          In Savings if more than 365 days have past since it was apply for the last time.
                                          
