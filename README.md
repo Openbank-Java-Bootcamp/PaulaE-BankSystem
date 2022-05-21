@@ -79,9 +79,9 @@ Users following the same squema as Accounts. All the users exteds the Class "Use
 In this section, we are going to explain the different end points as well as explain in more detail the methods which I believed either by it functionality or its
 caractheristics deserve a special attention.
 
-#### Create new accounts:
+#### Create new checking accounts:
 
-```http
+  ```http
   POST /api/checkings
 ```
 | Parameter | Type     | Description                |
@@ -95,7 +95,9 @@ caractheristics deserve a special attention.
                           has as optional attributes to provide: String mailAddress
                           
    Important notice: if the primary Owner age  is < 24. The account is automatically create as StudentChecking.
-                          
+
+#### Create new savings accounts:
+
 ```http
   POST /api/savings
 ```
@@ -105,7 +107,8 @@ caractheristics deserve a special attention.
 
     SavingsDTO -->  has as mandatory attributes to provide: Money Balance, AccountHolderDTO primary Owner, String secretKey
                     has as optional attributes to provide: AccountHolderDTO secondary Owner, BigDecimal Interest Rate
-                    
+            
+#### Create new credit cards accounts:
   ```http
   POST /api/creditcards
 ```
@@ -117,7 +120,7 @@ caractheristics deserve a special attention.
                        has as optional attributes to provide: AccountHolderDTO secondary Owner, BigDecimal Interest Rate, Money creditLimit
                        
 
-#### Create new users:
+#### Create admin users:
 
  ```http
   POST /api/admins
@@ -127,6 +130,8 @@ caractheristics deserve a special attention.
 | `adminDTO` | `adminDTO` | **Required**. **Valid** user to be save |
 
     adminDTO -->  has as mandatory attributes to provide: String name, String username, String password
+  
+#### Create thridparty users:
                        
  ```http
   POST /api/thirdparties
