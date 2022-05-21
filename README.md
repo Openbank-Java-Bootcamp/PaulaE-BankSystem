@@ -79,7 +79,7 @@ Users following the same squema as Accounts. All the users exteds the Class "Use
 In this section, we are going to explain the different end points as well as explain in more detail the methods which I believed either by it functionality or its
 caractheristics deserve a special attention.
 
-####Create new accounts:
+#### Create new accounts:
 
 ```http
   POST /api/checkings
@@ -164,7 +164,6 @@ caractheristics deserve a special attention.
 | `id` | `int` | **Required**. The id of the account of user to delete |
 
 
-#### Delete account and users:
 #### Get the balance of an account
 
  ```http
