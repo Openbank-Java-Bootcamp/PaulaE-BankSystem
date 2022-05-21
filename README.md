@@ -60,7 +60,7 @@ For the databases we use MySQL.
 The proyect was launched using our local server so, PostMan was choose as the tool for doing the request and verify the correct functioning of the system.
 And for the security we used Spring-Boot-Security.
 
-##3.	Models
+## 3.	Models
 
 Firstly, here you can see a picture of the Class diagram:
 
@@ -74,7 +74,7 @@ The different accounts have different properties, always following the instructi
 
 Users following the same squema as Accounts. All the users exteds the Class "User".
 
-## 3.	Server routes table(Method, Route or URL, Description as columns)
+## 4.	Server routes table(Method, Route or URL, Description as columns)
 
 In this section, we are going to explain the different end points as well as explain in more detail the methods which I believed either by it functionality or its
 caractheristics deserve a special attention.
@@ -270,7 +270,7 @@ Secondly, we look if in any of those accounts the primary or secondary owner is 
 | `amouth` | `Big Decimal` | **Required**. Amouth of money to tranfer |
   
   
-## 4.	Resources
+## 5.	Resources
 In order to complete this proyect Google, Shaun and Raymond were use are sources. Thank you all for sharing your knowledge with me!
 
 
