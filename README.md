@@ -51,7 +51,8 @@ at the beggining, that general authorization was needed to use the system.
 
       >Important notice: every time a transaction is made it is check if it could be a fraud case. A fraud case is consider if an account send 2 transaction in under 30s.
                       In the requirements, it was said that is should be under 1s but, in order to verify the correct working of my system, I modify the time limit.
-                      When a Fraud case is discover, the second transaction is denied and the status of the account is change to FREEZE.
+                      When a Fraud case is discover, the second transaction is denied and the status of the account is change to FREEZE. 
+                      Lastly, frraud is only trackable in account with status, which means, all of them except from Credit Cards.
 
 ## 2.	Technologies Used
 
