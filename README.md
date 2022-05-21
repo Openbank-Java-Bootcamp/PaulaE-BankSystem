@@ -98,7 +98,7 @@ caractheristics deserve a special attention.
 
 #### Create new savings accounts:
 
-```http
+  ```http
   POST /api/savings
 ```
 | Parameter | Type     | Description                |
@@ -109,6 +109,7 @@ caractheristics deserve a special attention.
                     has as optional attributes to provide: AccountHolderDTO secondary Owner, BigDecimal Interest Rate
             
 #### Create new credit cards accounts:
+
   ```http
   POST /api/creditcards
 ```
@@ -133,7 +134,7 @@ caractheristics deserve a special attention.
   
 #### Create thridparty users:
                        
- ```http
+  ```http
   POST /api/thirdparties
 ```
 | Parameter | Type     | Description                |
@@ -145,22 +146,22 @@ caractheristics deserve a special attention.
 
 #### Delete account and users:
 
-```http
+  ```http
   DELETE /api/checkings/{id}
 ```
-```http
+  ```http
   DELETE /api/savings/{id}
 ```
-``````http
+  ```http
   DELETE /api/creditcards/{id}
 ```
-``````http
+  ```http
   DELETE /api/studentscheckings/{id}
 ```
-``````http
+  ```http
   DELETE /api/admins/{id}
 ```
-``````http
+  ```http
   DELETE /api/thridsparties/{id}
 ```
 
