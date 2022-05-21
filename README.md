@@ -167,7 +167,7 @@ caractheristics deserve a special attention.
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `id` | `int` | **Required**. The id of the account of user to delete |
+| `id` | `int` | **Required**. The id of the account or user to delete |
 
 
 #### Get the balance of an account
@@ -189,10 +189,14 @@ caractheristics deserve a special attention.
 | `id` | `int` | **Required**. The id of the account to check the balance of |
 
   Important notice: When balance is checked, the systems verify is any interest rate / commision fee should be apply.
+  
                     1) Penalty Fee --> in Checkings and Savings if balance < minimum balance
+                    
                     2) Monthly Maintenance Fee --> in Checkings if more of 30 days have past since it was apply for the last time
-                    3) Interest rate --> in Credit Cardid if more than 30 days have past since it was apply for the last time
-                                         in Savings if more than 365 days have past since it was apply for the last time.
+                    
+                    3) Interest rate --> in Credit Cardid if more than 30 days have past since it was apply for the last time.
+                    
+                                         In Savings if more than 365 days have past since it was apply for the last time.
                                          
 
 ### Update de balance of an account
