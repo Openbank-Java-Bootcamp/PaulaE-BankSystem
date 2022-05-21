@@ -117,7 +117,7 @@ caractheristics deserve a special attention.
                        has as optional attributes to provide: AccountHolderDTO secondary Owner, BigDecimal Interest Rate, Money creditLimit
                        
 
-####Create new users:
+#### Create new users:
 
  ```http
   POST /api/admins
@@ -138,28 +138,34 @@ caractheristics deserve a special attention.
     thridPartyDTO -->  has as mandatory attributes to provide: String name, String username, String password, String hasedKey
 
 
-####Delete account and users:
+#### Delete account and users:
 
 ```http
   DELETE /api/checkings/{id}
 ```
 ```http
   DELETE /api/savings/{id}
+```
 ``````http
   DELETE /api/creditcards/{id}
+```
 ``````http
   DELETE /api/studentscheckings/{id}
+```
 ``````http
   DELETE /api/admins/{id}
+```
 ``````http
   DELETE /api/thridsparties/{id}
+```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `id` | `int` | **Required**. The id of the account of user to delete |
 
 
-### Get the balance of an account
+#### Delete account and users:
+#### Get the balance of an account
 
  ```http
   GET /api/checkings/{id}
